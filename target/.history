@@ -26,3 +26,4 @@ run 'evicted'
 run
 h2-browser
 run
+exit

@@ -4,7 +4,7 @@
 		module="sdevca1-build"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20190318174325"
+		publication="20190318204108"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>
