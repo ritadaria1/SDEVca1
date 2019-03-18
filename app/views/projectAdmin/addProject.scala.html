@@ -1,0 +1,47 @@
+@(addProjectForm: Form[models.projects.Project], user: models.users.User)
+<!-- addProjectForm defined above is the parameter
+ passed to this view by the controller -->
+@import models.projects._
+
+<!-- a 'helper' will be used to create the form dynamically, 
+though a static HTML form would also work -->
+@import helper._
+
+<!-- The page will be based on the main template -->
+@projectAdmin.main("New Project", user) {
+
+	<h3>Add a new Project</h3>
+	
+	<!-- Use the views.html.helpers package to create the form -->
+	@form(action = routes.AdminProjectCtrl.addProjectSubmit(), 'class -> "form-horizontal", 'role->"form", 'method -> "POST", 'enctype -> "multipart/form-data") {
+		@CSRF.formField
+		<!-- Build the form, adding an input for each field -->
+		<!-- Note the label parameter -->
+		@inputText(addProjectForm("name"), '_label -> "Name",'class -> "form-control")
+		@inputText(addProjectForm("description"), '_label -> "Description",'class -> "form-control")
+
+        <!-- Checkboxes for categories - current categories for this project are checked -->
+        <!-- Category.options provides a hashmap of value, name pairs -->
+        @for((value, name) <- Category.options) {
+            <input type="checkbox" name="catSelect[]" value="@value" />@name<br>        
+        }
+
+		@inputText(addProjectForm("department"), '_label -> "Department",'class -> "form-control")
+		<!-- Image upload input -->
+		<label>Image</label>
+    <input class="btn-sm btn-default" type="file" name="upload">
+	
+		<br><br>
+
+	<!-- Add a submit button -->
+  <div class="actions">
+      <input type="submit" value="Add Project" class="btn btn-primary">
+			<a href="@routes.AdminProjectCtrl.listProjects(0)"
+				<button class="btn btn-warning">Cancel</button>
+			</a>
+  </div>
+	} <!-- End Form definition -->
+
+} <!-- End of page content -->
+
+

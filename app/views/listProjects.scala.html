@@ -1,0 +1,83 @@
+@import models.projects.Category
+@import models.projects.Project
+@import models.users.User
+@(env: play.api.Environment, categories: List[Category], projects: List[Project], catId: Long, filter: String, user: User)
+
+
+
+@main("Projects Page", user) {
+
+	<style>
+		form {
+			margin-bottom: 1em;
+		}
+	</style>
+
+	<div class="row">
+
+	  <div class="col-md-3">
+	<div class="list-group">
+
+			<a href="@routes.ProjectCtrl.listProjects(0, filter)" class="list-group-item">All categories</a>
+			@for(c <- categories) {
+		<a href="@routes.ProjectCtrl.listProjects(c.getId, filter)" class="list-group-item">@c.getName</a>
+			}
+	</div>
+	  </div>
+
+		<div class="col-md-9">
+			@if(flash.containsKey("success")) {
+				  <div class="alert alert-success">
+					  @flash.get("success")
+				  </div>
+			}
+
+			<!-- Search Form -->
+			<div id="actions">
+			 <form action="@routes.ProjectCtrl.listProjects(catId)" method="GET">
+				<input type="search" id="searchbox" name="filter" value="@filter" placeholder="Filter by employee name...">
+				<input type="submit" id="searchsubmit" value="Filter by name" class="btn-md btn-primary">
+			 </form>
+			</div>
+
+			<table class="table table-bordered table-hover table-condensed">
+				<thead>
+
+				<tr>
+					<th></th>
+					<th>Name</th>
+					<th>Current Project</th>
+					<th>Department</th>
+					
+	
+				</tr>
+				</thead>
+				<tbody>
+
+					@for(p <- projects) {
+					<tr>
+
+						@if(env.resource("public/images/EmployeeImages/" + p.getId + ".jpg").isDefined) {
+							<td>
+							<center><img width="200px" height="200px" src="/assets/images/EmployeeImages/@(p.getId).jpg"/></center>
+							</td>
+							} else {
+							<td>
+							
+							<img width="200px" height="200px" src="/assets/images/EmployeeImages/thumbnails/noImage.png"/>
+							
+							</td>
+						}
+						<td>@p.getName</td>
+						<td>@p.getDescription</td>
+
+						<td>@p.getDepartment</td>
+						
+						
+					</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}

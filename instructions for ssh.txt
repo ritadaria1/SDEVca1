@@ -1,0 +1,19 @@
+ssh-keygen -t rsa -C "X000000@computing.stu.it-tallaght.ie"
+
+Just press enter to whatever prompts.
+
+
+[ryan@ryan-pc GameShop_Project]$ cd ~/.ssh
+[ryan@ryan-pc .ssh]$ nano id_rsa.pub
+
+Copy all the text in the id_rsa file. 
+
+Go to Azure repo and try and clone. 
+
+In HTTPS/SSH, click manage ssd keys. 
+
+Press add, and add what you copied to key data.
+
+git clone git@ssh.dev.azure.com:v3/X001446310306/GameShop_Project/GameShop_Project
+
+try that now, should work and you should be able to commit too.

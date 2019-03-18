@@ -1,0 +1,115 @@
+@import models.users.User
+@(pagename: String, user: User)(content:Html)
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>FishBone Games</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+		<link rel="stylesheet" href="assets/stylesheets/main2.css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="logo"></div>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					@if(user != null) {
+					
+					<li><a href="@routes.LoginController.logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+					} else {
+					<li><a href="@routes.HomeController.registerUser()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="@routes.LoginController.login()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					}
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<header>
+						<a href='@routes.ProjectCtrl.listProjects(0)'><img src="/assets/images/logo.png" width='300px' height='300px' alt="logo"></a>
+						<h1>This is the Fishbone Games employee project portal.</h1>
+						@if(user != null) {
+						<p>Wellcome to the Project Portal</p>
+						
+						} else {
+						<p>Please Login / Sign Up to access the Project Portal</p>
+						<a href="#menu" class="button big scrolly">Login</a>
+						
+						<script type="text/javascript">
+						
+						if (window.location.href== "http://localhost:9000/listProjects") {
+  							 window.location.href = 'http://localhost:9000/login'; 
+						}
+    						
+						
+						</script>
+						}
+					</header>
+					
+				</div>
+			</section>
+
+		<!-- Main -->
+
+			<div id="main">
+			<section class="wrapper style1">
+			@content
+			</section>
+
+				<!--
+					<section class="wrapper style1">
+						<div class="inner">
+							
+								<div class="flex flex-2">
+									<div class="col col1">
+										<div class="image round fit">
+											<a href="generic.html" class="link"><img src="images/pic01.jpg" alt="" /></a>
+										</div>
+									</div>
+									<div class="col col2">
+										<h3>Maecenas a gravida quam</h3>
+										
+										
+										
+									</div>
+								</div>
+						</div>
+					</section>
+				--!>
+			
+
+				
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+					</ul>
+					<p>&copy; Fishbone Games. All rights reserved.</p>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="/assets/javascripts/jquery.min.js"></script>
+			<script src="/assets/javascripts/jquery.scrolly.min.js"></script>
+			<script src="/assets/javascripts/jquery.scrollex.min.js"></script>
+			<script src="/assets/javascripts/skel.min.js"></script>
+			<script src="/assets/javascripts/util.js"></script>
+			<script src="/assets/javascripts/main.js"></script>
+
+	</body>
+</html>
